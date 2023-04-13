@@ -16,7 +16,7 @@ This Terraform code deploys an instance of HashiCorp Vault and Cloud Volumes ONT
 
 ## 2. Preparation
 
-Download or Fork KMIP Project with git clone
+Download or Fork KMIP Project
 
 ```bash
 git clone https://github.com/lomar92/netapp-vault-kmip
