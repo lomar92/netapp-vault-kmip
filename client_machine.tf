@@ -38,14 +38,23 @@ resource "aws_instance" "client" {
   tags = {
     Name = "client-ubuntu-vm"
   }
-## Hier noch mkdir ändern auf home/user/encryption - da es ein Verzeichnis für den Nutzer sein soll
+
   user_data = <<-EOF
               #!/bin/bash
               sudo apt-get update
               sudo apt-get install -y nfs-common
               mkdir /home/ubuntu/encryption_volume
               sudo chown -R ubuntu:ubuntu /home/ubuntu/encryption_volume
-              sudo echo "key" >> /home/ubuntu/vault_ssh_key.pem
               EOF
+  connection {
+    type        = "ssh"
+    user        = "ubuntu"
+    private_key = file(var.private_key_path)
+    host = aws_instance.client.public_ip
+  }
+
+  provisioner "file" {
+    source      = "terraform/vault_ssh_key.pem"
+    destination = "/home/ubuntu/"
+  }
 }
-## HIER NOCH Private Key mitgeben, weil ubuntu client auch als Jump Host fungiert für ssh ONTAP
