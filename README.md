@@ -11,7 +11,7 @@ This Terraform code deploys an instance of HashiCorp Vault and Cloud Volumes ONT
 - [BlueXP Refresh Token](https://services.cloud.netapp.com/refresh-token)
 - [BlueXP Service Account Key & Client ID](https://console.bluexp.netapp.com/credentials/user-credentials#accountManagement)
 - [NetApp Support Site Account](https://docs.netapp.com/us-en/cloud-manager-setup-admin/task-adding-nss-accounts.html)
-- A client machine that acts as a jump host for configuring NetApp Cloud Volumes ONTAP. Provided in in code. 
+- A client machine that acts as a jump host for configuring NetApp Cloud Volumes ONTAP. Provided in code. 
 - Your AWS Public & Private Key for SSH
 
 
