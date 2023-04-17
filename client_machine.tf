@@ -54,7 +54,7 @@ resource "aws_instance" "client" {
   }
 
   provisioner "file" {
-    source      = "terraform/vault_ssh_key.pem"
-    destination = "/home/ubuntu/"
+    source      = "vault_ssh_key.pem"
+    destination = "/home/ubuntu/vault_ssh_key.pem"
   }
 }
