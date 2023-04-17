@@ -1,7 +1,7 @@
 
 # External Key Manager Configuration
 
-This Terraform code deploys an instance of HashiCorp Vault and Cloud Volumes ONTAP on AWS. With this code, you can quickly and easily deploy an External Key Management Server with KMIP Secrets Engine and a running an Instance of NetApp's Cloud Volumes ONTAP for encrypting volumes and aggregates in AWS. 
+This Terraform code deploys an instance of HashiCorp Vault and Cloud Volumes ONTAP on AWS. With this code, you can quickly and easily deploy an External Key Management Server with KMIP Secrets Engine and a running Instance of NetApp's Cloud Volumes ONTAP for encrypted volumes and aggregates in AWS.
 
 
 ## 1. Requirements
