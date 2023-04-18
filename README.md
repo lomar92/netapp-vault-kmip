@@ -67,4 +67,4 @@ Now go for a Coffe and wait for 30minutes until your deployment is finished.
 
 ## 3. HashiCorp Vault & KMIP Setup Documentation
 
-[Follow this KMIP Setup Instructions on Medium](LINK_TO_MY_BLOG)
+[Follow this KMIP Setup Instructions on Medium](https://medium.com/hashicorp-engineering/hashicorp-vault-as-an-external-key-manager-for-cloud-volumes-ontap-9ba85bb5a2bd)
