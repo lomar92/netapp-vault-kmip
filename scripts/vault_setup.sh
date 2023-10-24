@@ -4,9 +4,9 @@
 sudo yum install -y jq
 
 # Installieren von Vault
-curl --remote-name "https://releases.hashicorp.com/vault/1.12.3+ent/vault_1.12.3+ent_linux_amd64.zip"
+curl --remote-name "https://releases.hashicorp.com/vault/1.13.4+ent/vault_1.13.4+ent_linux_amd64.zip"
 
-unzip vault_1.12.3+ent_linux_amd64.zip
+unzip vault_1.13.4+ent_linux_amd64.zip
 
 sudo mv vault /usr/local/bin/
 
@@ -26,7 +26,7 @@ sudo chmod 777 /opt/raft
 # Konfiguration von Vault
 ## Hinzufügen einer Enterprise-Lizenz
 sudo touch /etc/vault.d/license.hclic
-echo "VAULT_LICENSE" | sudo tee /etc/vault.d/license.hclic
+echo "VAULT_ENTERPRISE_LICENSE_HERE" | sudo tee /etc/vault.d/license.hclic
 
 ## Vault-Konfigurationsdatei
 sudo cat > /etc/vault.d/vault.hcl << EOF
@@ -46,6 +46,11 @@ enterprise {
 
 auto_snapshot {
   enabled = true
+}
+
+reporting {
+		license {
+			enabled = false }
 }
 
 disable_mlock = true
@@ -98,48 +103,3 @@ export VAULT_ADDR='http://0.0.0.0:8200'
 EOF
 
 sudo systemctl enable vault.service --now
-# sudo systemctl start vault.service
-# sudo systemctl status vault.service
-
-# Diese Befehle ausführen: 
-# vault operator init -key-threshold=1 -key-shares=1 -format=json > vault.txt
-
-### Ohne Systemd Service!
-# vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-# on your vault vm_instance :
-# export VAULT_ADDR='http://0.0.0.0:8200' // on your local machine export VAULT_ADDR=<public/private_ip>
-
-## start vault server without systemd service
-# vault server -config /etc/vault.d/vault.hcl
-
-# neue ssh tab aufmachen und auf vault vm ssh connecten
-# vault operator init -key-threshold=1 -key-shares=1 -format=json > vault.txt
-
-# cat vault.txt 
-## --> kopiere unseal_keys_b64 
-
-# cat vault.txt | jq -r .root_token > token.txt
-
-# vault operator unseal 
-
-# prompt: vault_unseal_key
-# export VAULT_TOKEN=$(cat token.txt)
-
-# überprüfe Lizenzsschlüssel 
-## --> vault license get
-
-# vault login $VAULT_TOKEN
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-# Diese Vault Befehle durchführen, beim Neu-Start der Vault VM
-# vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-# on your vault instance :
-# export VAULT_ADDR='http://0.0.0.0:8200'
-# start vault server: vault server -config /etc/vault.d/vault.hcl
-# cat vault.txt --> kopiere unseal_keys_b64 
-# vault operator unseal 
-# prompt: vault_unseal_key
-# export VAULT_TOKEN=$(cat token.txt)
-# überprüfe Lizenzsschlüssel --> vault license get
-# vault login $VAULT_TOKEN
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

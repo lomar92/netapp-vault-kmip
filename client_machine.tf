@@ -50,7 +50,7 @@ resource "aws_instance" "client" {
     type        = "ssh"
     user        = "ubuntu"
     private_key = file(var.private_key_path)
-    host = aws_instance.client.public_ip
+    host        = aws_instance.client.public_ip
   }
 
   provisioner "file" {

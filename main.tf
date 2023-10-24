@@ -22,8 +22,6 @@ data "aws_ami" "amazon_linux_2" {
 
 resource "aws_eip" "vault_eip" {
   instance = aws_instance.vault_instance.id
-  vpc      = true
-
   tags = {
     Name = "vault-eip"
   }
@@ -93,17 +91,3 @@ resource "null_resource" "configure-vault" {
   }
 
 }
-
-# # Create EBS volume for data storage
-# resource "aws_ebs_volume" "vault_ebs_volume" {
-#   availability_zone = aws_subnet.vault_subnet.availability_zone
-#   size              = 10
-#   type              = "gp2"
-# }
-
-# # Attach EBS volume to instance
-# resource "aws_volume_attachment" "vault_volume_attachment" {
-#   device_name = "/dev/sdf"
-#   volume_id   = aws_ebs_volume.vault_ebs_volume.id
-#   instance_id = aws_instance.vault_instance.id
-# }

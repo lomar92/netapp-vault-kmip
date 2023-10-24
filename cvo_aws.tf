@@ -30,9 +30,9 @@ resource "netapp-cloudmanager_connector_aws" "cl-occm-aws" {
   account_id                = "account-8MEUiBUe"
 }
 
-resource "netapp-cloudmanager_cvo_aws" "cvo-svm-aws" {
+resource "netapp-cloudmanager_cvo_aws" "cvo-aws" {
   provider          = netapp-cloudmanager
-  name              = "svm_free"
+  name              = "svm_client"
   region            = "eu-central-1"
   subnet_id         = aws_subnet.vault_subnet.id
   vpc_id            = aws_vpc.vault_vpc.id
@@ -53,29 +53,4 @@ resource "netapp-cloudmanager_cvo_aws" "cvo-svm-aws" {
   instance_type         = "m5.xlarge"
   ebs_volume_size       = "500"
   ebs_volume_size_unit  = "GB"
-}
-
-resource "netapp-cloudmanager_volume" "cvo-volume-nfs" {
-  provider                  = netapp-cloudmanager
-  volume_protocol           = "nfs"
-  name                      = "encryption_volume"
-  size                      = 10
-  unit                      = "GB"
-  provider_volume_type      = "gp2"
-  export_policy_type        = "custom"
-  export_policy_ip          = ["0.0.0.0/0"]
-  export_policy_nfs_version = ["nfs4"]
-  snapshot_policy_name      = "sp1"
-  snapshot_policy {
-    schedule {
-      schedule_type = "5min"
-      retention     = 10
-    }
-    schedule {
-      schedule_type = "hourly"
-      retention     = 5
-    }
-  }
-  working_environment_id = netapp-cloudmanager_cvo_aws.cvo-svm-aws.id
-  client_id              = netapp-cloudmanager_connector_aws.cl-occm-aws.client_id
 }

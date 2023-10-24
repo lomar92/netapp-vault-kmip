@@ -54,6 +54,15 @@ resource "aws_security_group" "vault_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  ## TCP allow Boundary Client connections 9202, if you running Boundary for secure access outside of corporate network
+  ingress {
+    from_port   = 9202
+    to_port     = 9202
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   ## HTTP
   ingress {
     from_port   = 80
