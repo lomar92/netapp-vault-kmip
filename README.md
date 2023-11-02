@@ -15,14 +15,14 @@ This Terraform code deploys an instance of HashiCorp Vault and Cloud Volumes ONT
 
 ## 2. Preparation
 
-Download or Fork KMIP Project
+#### Download or Fork KMIP Project
 
 ```bash
 git clone https://github.com/lomar92/netapp-vault-kmip
 cd vault-netapp-kmip
 ```
 
-Prepare Terraform Variables
+#### Prepare Terraform Variables
 
 ```bash
 touch terraform.tfvars
@@ -41,13 +41,13 @@ cloudmanager_sa_secret_key = "Service_Account_Secret_Key";
 cloudmanager_sa_client_id = "Service_Account_Client_ID";
 ```
 
-Initiliaze your Working Directory
+#### Initiliaze your Working Directory
 
 ```bash
 terraform init
 ```
 
-Review the planned infrastructure changes and confirm them or just run Terraform apply!
+#### Review the planned infrastructure changes and confirm them or just run Terraform apply!
 
 ```bash
 terraform apply --auto--aprove
