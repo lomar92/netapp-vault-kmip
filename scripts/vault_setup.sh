@@ -4,9 +4,9 @@
 sudo yum install -y jq
 
 # Installieren von Vault
-curl --remote-name "https://releases.hashicorp.com/vault/1.13.4+ent/vault_1.13.4+ent_linux_amd64.zip"
+curl --remote-name "https://releases.hashicorp.com/vault/1.15.1+ent/vault_1.15.1+ent_linux_amd64.zip"
 
-unzip vault_1.13.4+ent_linux_amd64.zip
+unzip vault_1.15.1+ent_linux_amd64.zip
 
 sudo mv vault /usr/local/bin/
 
@@ -26,7 +26,7 @@ sudo chmod 777 /opt/raft
 # Konfiguration von Vault
 ## Hinzufügen einer Enterprise-Lizenz
 sudo touch /etc/vault.d/license.hclic
-echo "VAULT_ENTERPRISE_LICENSE_HERE" | sudo tee /etc/vault.d/license.hclic
+echo "VAULT_LICENSE" | sudo tee /etc/vault.d/license.hclic
 
 ## Vault-Konfigurationsdatei
 sudo cat > /etc/vault.d/vault.hcl << EOF
