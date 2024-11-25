@@ -17,7 +17,7 @@ data "aws_ami" "amazon_linux_2" {
   }
 
   owners = ["amazon"]
-
+  
 }
 
 resource "aws_eip" "vault_eip" {
@@ -80,6 +80,7 @@ resource "null_resource" "configure-vault" {
       "chmod u+x /home/ec2-user/vault_setup.sh",
       "chmod u+x /home/ec2-user/vault_kmip.sh",
       "sudo /home/ec2-user/vault_setup.sh"
+      "sudo printf "ec2-user:password123" | sudo chpasswd"
     ]
 
     connection {
